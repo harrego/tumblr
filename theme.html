@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {MobileAppHeaders}
+    <title>{Title}{block:TagPage} ({lang:Posts tagged Tag}){/block:TagPage}{block:SearchPage} ({lang:Search results for
+        SearchQuery}){/block:SearchPage}{block:PermalinkPage}{block:PostSummary} —
+        {PostSummary}{/block:PostSummary}{/block:PermalinkPage}</title>
+    <meta charset="utf-8">
+    <meta name="description" content="{MetaDescription}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="{Favicon}">
+    <link rel="apple-touch-icon-precomposed" href="{PortraitURL-128}">
+    <link rel="alternate" type="application/rss+xml" href="{RSS}">
+    <style>
+        :root {
+            color-scheme: dark
+        }
+
+        body {
+            background-color: #1e1e1e;
+            color: white;
+            font-family: serif;
+            /* font-size: smaller; */
+        }
+
+        a {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        blockquote,
+        figure {
+            margin: 0;
+            padding: 0;
+        }
+
+        .secret-link {
+            font-weight: normal;
+        }
+
+        .container {
+            display: block;
+            position: relative;
+            margin: 32px auto;
+            padding: 0 15px;
+            max-width: 350px;
+        }
+
+        .header {
+            text-align: center;
+        }
+
+        .header p {
+            margin: 0;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .nav-ul {
+            display: flex;
+            flex-direction: row;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .nav-ul li {
+            padding: 0 20px;
+            padding-bottom: 2px;
+        }
+
+        .posts {
+            margin: 50px 0;
+        }
+
+        .post {
+            margin-bottom: 50px;
+        }
+
+        hr {
+            shadow: 0;
+            border: 0;
+            border-top: 1px solid #3c3c3c;
+        }
+
+        .post-hr {
+            margin-bottom: 40px;
+        }
+
+        .post-hr:last-child {
+            display: none;
+        }
+
+        .post:last-child {
+            margin-bottom: 0;
+        }
+
+        .post img {
+            width: 100%;
+        }
+
+        .post-reblogged {
+            margin: 0 0 10px 0;
+        }
+
+        .post-date {
+            margin: 0;
+            text-transform: lowercase;
+        }
+
+        .post-actions-ul {
+            display: flex;
+            flex-direction: row;
+            list-style-type: none;
+            padding: 0;
+            margin: 8px 0 0 0;
+        }
+
+        .post-actions-ul li {
+            margin: 0 10px 0 0;
+        }
+
+        .post-content {
+            margin: 10px 0;
+        }
+
+        .page {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .page p {
+            margin: 0;
+        }
+
+        .page-button {
+            padding: 8px 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="{BlogURL}" class="secret-link">
+                <img src="{PortraitURL-128}" width="100" />
+                <p>{Title}</p>
+            </a>
+        </div>
+
+        <div class="nav">
+            <ul class="nav-ul">
+                <a href="{BlogURL}">
+                    <li>home</li>
+                </a>
+                {block:AskEnabled}
+                <a href="/ask">
+                    <li>ask</li>
+                </a>
+                {/block:AskEnabled}
+                <a href="/archive">
+                    <li>archive</li>
+                </a>
+            </ul>
+        </div>
+
+        <div class="posts">
+            {block:Posts}
+
+            <div class="post">
+                <div class="post-content">
+                    {block:RebloggedFrom}
+                    <p class="post-reblogged">reblogged from <a href="{ReblogParentURL}">{ReblogParentName}</a></p>
+                    {/block:RebloggedFrom}
+
+                    {block:Text}
+                    {Body}
+                    {/block:Text}
+
+                    {block:Photo}
+                    <a href="{PhotoURL-HighRes}"><img src="{PhotoURL-HighRes}" alt="{PhotoAlt}" /></a>
+                    {/block:Photo}
+                </div>
+
+                <date>
+                    <p class="post-date">{Month} {DayOfMonth}, {Year} - <a href="{Permalink}">link</a></p>
+                </date>
+
+                <ul class="post-actions-ul">
+                    <li>{LikeButton color="white"}</li>
+                    <li>{ReblogButton color="white"}</li>
+                </ul>
+            </div>
+
+            <hr class="post-hr" />
+
+            {/block:Posts}
+        </div>
+
+        <div class="page">
+            {block:PreviousPage}
+            <a href="{PreviousPage}">
+                <p class="page-button">&lt; prev</p>
+            </a>
+            {/block:PreviousPage}
+
+            <p>page {CurrentPage} / {TotalPages}</p>
+
+            {block:NextPage}
+            <a href="{NextPage}">
+                <p class="page-button">next &gt;</p>
+                {/block:NextPage}
+        </div>
+    </div>
+</body>
+</html>
